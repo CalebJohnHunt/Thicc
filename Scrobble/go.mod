@@ -1,4 +1,4 @@
-module temp2
+module scrobble
 
 go 1.19
 
