@@ -226,12 +226,14 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		case "ctrl+r":
 			m.reset()
-		case "ctrl+j":
-			m.memo = "test"
+		case "ctrl+s":
+			if m.memo == "test" {
+				m.memo = ""
+			} else {
+				m.memo = "test"
+			}
 		case " ":
 			m.move()
-		// case "ctrl+s":
-		// 	m.memo = strconv.Itoa(m.calculateScore())
 		case "backspace":
 			if m.body[m.y][m.x] == space {
 				m.moveDir(-m.dir)
@@ -279,6 +281,7 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 
 			if m.memo == "test" && m.letters[r] > 0 {
+				m.memo = ""
 				m.letters[r]--
 				for i := 0; i < 3; i++ {
 					m.letters[rune(rs.Int31n(26)+'A')]++
